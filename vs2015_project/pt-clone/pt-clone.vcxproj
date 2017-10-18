@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6C633792-F87D-4F1C-AB02-C25202FFEDE6}</ProjectGuid>
+    <RootNamespace>pt-clone</RootNamespace>
+    <ProjectName>pt-clone</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>../../vs_sdl_include/lib;$(VCInstallDir)lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../vs_sdl_include/include;$(VCInstallDir)include;$(IncludePath)</IncludePath>
+    <OutDir>..\..\release\</OutDir>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>protracker</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>../../vs_sdl_include/lib;$(VCInstallDir)lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../vs_sdl_include/include;$(VCInstallDir)include;$(IncludePath)</IncludePath>
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;HAVE_M_PI</PreprocessorDefinitions>
+      <CompileAs>CompileAsC</CompileAs>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointModel>Fast</FloatingPointModel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;libcmt.lib;libvcruntime.lib;libucrt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <MinimumRequiredVersion>
+      </MinimumRequiredVersion>
+      <LargeAddressAware>true</LargeAddressAware>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+    </Link>
+    <PostBuildEvent>
+      <Command>xp_pe_patch "..\..\release\protracker.exe" -nb</Command>
+      <Message>Patches the release binary to run on Windows XP</Message>
+    </PostBuildEvent>
+    <Manifest>
+      <VerboseOutput>false</VerboseOutput>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;WIN32;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;HAVE_M_PI</PreprocessorDefinitions>
+      <CompileAs>CompileAsC</CompileAs>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ExceptionHandling>false</ExceptionHandling>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
+      <MinimumRequiredVersion>
+      </MinimumRequiredVersion>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LargeAddressAware>true</LargeAddressAware>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\gfx\pt_gfx_aboutscreen.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_arrow.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_clear.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_diskop.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_editop.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_font.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_icon.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_loop_pins.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_mod2wav.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_mute_buttons.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_pat2smp_dialog.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_patcursor.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_pointer.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_posed.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_sampler.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_spectrum.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_terminal.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_tracker.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_vumeter.c" />
+    <ClCompile Include="..\..\src\gfx\pt_gfx_yes_no_dialog.c" />
+    <ClCompile Include="..\..\src\pt_terminal.c" />
+    <ClCompile Include="..\..\src\pt_visuals.c" />
+    <ClInclude Include="..\..\src\pt_audio.h" />
+    <ClInclude Include="..\..\src\pt_blep.h" />
+    <ClInclude Include="..\..\src\pt_keyboard.h" />
+    <ClInclude Include="..\..\src\pt_config.h" />
+    <ClInclude Include="..\..\src\pt_dirent.h" />
+    <ClInclude Include="..\..\src\pt_diskop.h" />
+    <ClInclude Include="..\..\src\pt_header.h" />
+    <ClInclude Include="..\..\src\pt_edit.h" />
+    <ClInclude Include="..\..\src\pt_helpers.h" />
+    <ClInclude Include="..\..\src\pt_modloader.h" />
+    <ClInclude Include="..\..\src\pt_mouse.h" />
+    <ClInclude Include="..\..\src\pt_palette.h" />
+    <ClInclude Include="..\..\src\pt_patternviewer.h" />
+    <ClInclude Include="..\..\src\pt_sampleloader.h" />
+    <ClInclude Include="..\..\src\pt_sampler.h" />
+    <ClInclude Include="..\..\src\pt_scopes.h" />
+    <ClInclude Include="..\..\src\pt_tables.h" />
+    <ClInclude Include="..\..\src\pt_terminal.h" />
+    <ClInclude Include="..\..\src\pt_textout.h" />
+    <ClInclude Include="..\..\src\pt_unicode.h" />
+    <ClInclude Include="..\..\src\pt_visuals.h" />
+    <ClCompile Include="..\..\src\pt_audio.c" />
+    <ClCompile Include="..\..\src\pt_blep.c" />
+    <ClCompile Include="..\..\src\pt_keyboard.c" />
+    <ClCompile Include="..\..\src\pt_config.c" />
+    <ClCompile Include="..\..\src\pt_dirent.c" />
+    <ClCompile Include="..\..\src\pt_diskop.c" />
+    <ClCompile Include="..\..\src\pt_edit.c" />
+    <ClCompile Include="..\..\src\pt_helpers.c" />
+    <ClCompile Include="..\..\src\pt_main.c" />
+    <ClCompile Include="..\..\src\pt_modloader.c" />
+    <ClCompile Include="..\..\src\pt_modplayer.c" />
+    <ClCompile Include="..\..\src\pt_mouse.c" />
+    <ClCompile Include="..\..\src\pt_palette.c" />
+    <ClCompile Include="..\..\src\pt_patternviewer.c" />
+    <ClCompile Include="..\..\src\pt_sampleloader.c" />
+    <ClCompile Include="..\..\src\pt_sampler.c" />
+    <ClCompile Include="..\..\src\pt_scopes.c" />
+    <ClCompile Include="..\..\src\pt_tables.c" />
+    <ClCompile Include="..\..\src\pt_textout.c" />
+    <ClCompile Include="..\..\src\pt_unicode.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\protracker.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\protracker.rc">
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
